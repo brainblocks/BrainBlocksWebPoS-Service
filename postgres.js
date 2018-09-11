@@ -81,7 +81,8 @@ export async function postInsert<T>(
 export async function postSelect<T>(
   table: string,
   criteria: { [string]: string },
-  columns: Array<string> = ['id']
+  columns: Array<string> = ['id'],
+  other: string
 ): Promise<Array<T>> {
   let keys = Object.keys(criteria)
   let values = keys.map(key => criteria[key])
@@ -89,9 +90,13 @@ export async function postSelect<T>(
   let query = `
         SELECT ${columns.join(', ')}
             FROM ${table}
-            WHERE ${keys.map((key, i) => `${key} = $${i + 1}`).join(' AND ')};
+            WHERE ${keys.map((key, i) => `${key} = $${i + 1}`).join(' AND ')}
     `
-
+  if (other) {
+    query += other
+  }
+  query += ';'
+  console.log(query)
   return await postQuery(query, values)
 }
 

@@ -1,11 +1,19 @@
-import { postSelect } from './postgres'
+import { postSelect, postInsert } from './postgres'
 
-export async function getTransactionsByAddress(address) {
-  return await postSelect(
+export function getTransactionsByAddress(address) {
+  return postSelect(
     'transactions',
     {
       address: address
     },
-    ['*']
+    ['*'],
+    'ORDER BY created_at DESC'
   )
+}
+
+export function addTransaction(tx) {
+  return postInsert('transactions', {
+    ...tx,
+    created_at: new Date()
+  })
 }

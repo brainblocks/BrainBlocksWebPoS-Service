@@ -3,7 +3,7 @@ import cors from 'cors'
 import http from 'http'
 import bodyParser from 'body-parser'
 import config from './config'
-import { getTransactionsByAddress } from './transactions'
+import { getTransactionsByAddress, addTransaction } from './transactions'
 
 const app = express()
 
@@ -26,12 +26,28 @@ app.get('/transactions/:address', (req, res, next) => {
         transactions: rows
       })
     })
-    .catch(e => {})
+    .catch(err => {
+      console.error('Error in `/transactions/:address` ===', err)
+      next(err)
+    })
 })
 
 /**
  * Add transaction
  */
-app.post('/transaction', (req, res, next) => {})
+app.post('/transaction', (req, res, next) => {
+  console.log(req.body)
+  addTransaction(req.body)
+    .then(result => {
+      res.json({
+        success: true,
+        txId: result.id
+      })
+    })
+    .catch(err => {
+      console.error('Error in `post` to `transaction` ===', err)
+      next(err)
+    })
+})
 
 server.listen(config.serverPort)
