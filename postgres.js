@@ -96,7 +96,6 @@ export async function postSelect<T>(
     query += other
   }
   query += ';'
-  console.log(query)
   return await postQuery(query, values)
 }
 

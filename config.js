@@ -6,6 +6,7 @@ export default {
     USER: process.env.DB_USER,
     NAME: process.env.DB_NAME,
     PASSWORD: process.env.DB_PASSWORD || null,
-    PORT: process.env.DB_PORT
+    PORT: process.env.DB_PORT,
+    transactionsTable: `pos_transactions`
   }
 }
