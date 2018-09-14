@@ -19,7 +19,7 @@ const server = http.Server(app)
 /**
  * Get transactions for address
  */
-app.get('/transactions/:address', (req, res, next) => {
+app.get('/api/transactions/:address', (req, res, next) => {
   getTransactionsByAddress(req.params.address)
     .then(rows => {
       res.json({
@@ -36,7 +36,7 @@ app.get('/transactions/:address', (req, res, next) => {
 /**
  * Add transaction
  */
-app.post('/transaction', (req, res, next) => {
+app.post('/api/transaction', (req, res, next) => {
   console.log(req.body)
   addTransaction(req.body)
     .then(result => {
@@ -54,7 +54,7 @@ app.post('/transaction', (req, res, next) => {
 /**
  * Get currency price by code
  */
-app.get('/currencies/:currencyCode', (req, res, next) => {
+app.get('/api/currencies/:currencyCode', (req, res, next) => {
   getCurrency(req.params.currencyCode)
     .then(rows => {
       res.json({
