@@ -7,6 +7,11 @@ export default {
     NAME: process.env.DB_NAME,
     PASSWORD: process.env.DB_PASSWORD || null,
     PORT: process.env.DB_PORT,
-    transactionsTable: `pos_transactions`
+    transactionsTable: `pos_transactions`,
+    currenciesTable: `pos_currencies`
+  },
+  oer: {
+    appId: process.env.OER_APP_ID,
+    latestEndpoint: 'https://openexchangerates.org/api/latest.json'
   }
 }

@@ -4,6 +4,7 @@ import http from 'http'
 import bodyParser from 'body-parser'
 import config from './config'
 import { getTransactionsByAddress, addTransaction } from './transactions'
+import { getCurrency } from './currencies'
 
 const app = express()
 
@@ -46,6 +47,23 @@ app.post('/transaction', (req, res, next) => {
     })
     .catch(err => {
       console.error('Error in `post` to `transaction` ===', err)
+      next(err)
+    })
+})
+
+/**
+ * Get currency price by code
+ */
+app.get('/currencies/:currencyCode', (req, res, next) => {
+  getCurrency(req.params.currencyCode)
+    .then(rows => {
+      res.json({
+        success: true,
+        currency: rows
+      })
+    })
+    .catch(err => {
+      console.error('Error in `/currencies/:currencyCode` ===', err)
       next(err)
     })
 })
