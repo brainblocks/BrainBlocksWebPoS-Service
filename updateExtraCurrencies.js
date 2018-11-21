@@ -8,7 +8,7 @@ axios
   .get(`${oer.latestEndpoint}?app_id=${oer.appId}&base=usd&symbols=VES`)
   .then(({ data }) => {
     console.log(data)
-    return postUpdateID(DATABASE.currenciesTable, 'VES', {
+    return postUpdateID(DATABASE.currenciesTable, 'ves', {
       price: data.rates.VES,
       timestamp: data.timestamp
     })
