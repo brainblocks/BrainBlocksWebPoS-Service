@@ -5,11 +5,11 @@ import config from './config'
 const { DATABASE, oer } = config
 
 axios
-  .get(`${oer.latestEndpoint}?app_id=${oer.appId}&base=usd&symbols=VEF_BLKMKT`)
+  .get(`${oer.latestEndpoint}?app_id=${oer.appId}&base=usd&show_alternative=true&symbols=VEF_BLKMKT`)
   .then(({ data }) => {
     console.log(data)
     return postUpdateID(DATABASE.currenciesTable, 'ves', {
-      price: data.rates.VES,
+      price: data.rates.VEF_BLKMKT,
       timestamp: data.timestamp
     })
   })
