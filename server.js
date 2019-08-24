@@ -20,7 +20,7 @@ const server = http.Server(app)
  * Get transactions for address
  */
 app.get('/api/transactions/:address', (req, res, next) => {
-  getTransactionsByAddress(req.params.address.replace("xrb_", "nano_");)
+  getTransactionsByAddress(req.params.address.replace("xrb_", "nano_"))
     .then(rows => {
       res.json({
         success: true,
